@@ -139,6 +139,10 @@ body{
     text-align: center;
     margin-top: 2rem;
   }
+  img {
+    max-width: 100%; /* Image will not exceed the container's width */
+    height: auto;    /* Maintain the aspect ratio */
+}
 /* Responsive adjustments for nav */
 @media (max-width: 991.98px) {
     .navbar-nav {
@@ -167,6 +171,7 @@ body{
     .hero-content p {
       font-size: 1rem;
     }
+    
   }
   
   @media (max-width: 576px) {
@@ -183,3 +188,21 @@ body{
     }
   }
   
+  @media (max-width: 375px) {
+    .hero {
+      height: 50vh;
+    }
+  
+    .hero-content h1 {
+      font-size: 1.5rem;
+    }
+  
+    .hero-content p {
+      font-size: 0.6rem;
+    }
+      img {
+          max-width: 100%; /* Image will resize to fit the container */
+          height: auto;    /* Maintain aspect ratio */
+      }
+  
+    }

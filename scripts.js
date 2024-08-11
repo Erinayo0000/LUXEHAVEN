@@ -62,6 +62,10 @@ function initializePage() {
 
 
 function fetchFeaturedProducts() {
+    const isMobile = window.innerWidth <= 375; // Example breakpoint for mobile
+    const secondMobile = window.innerWidth <= 768; // Example breakpoint for mobile
+    const imageSize = isMobile ? 'small' : 'large'; // Choose the image size
+
     fetch('https://fakestoreapi.com/products')
         .then(response => response.json())
         .then(products => {
@@ -69,16 +73,19 @@ function fetchFeaturedProducts() {
             products.slice(1, 4).forEach(product => {
                 const productDiv = document.createElement('div');
                 productDiv.classList.add('product');
+                const imageUrl = product.image.replace(/w\d+/, `w${imageSize}`); 
                 productDiv.innerHTML = `
-                    <img src="${product.image}" alt="${product.title}">
+                    <img src="${imageUrl}" alt="${product.title}">
                     <h3>${product.title}</h3>
                     <p>$${product.price}</p>
                     <a href="product.html?id=${product.id}">View Details</a>
                 `;
                 featuredProducts.appendChild(productDiv);
             });
-        });
+        })
+        .catch(error => console.error('Error fetching featured products:', error));
 }
+
 function fetchCategories() {
     fetch('https://fakestoreapi.com/products/categories')
         .then(response => response.json())
